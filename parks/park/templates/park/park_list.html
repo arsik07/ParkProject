@@ -1,0 +1,279 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Парки Казани</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- {% load staticfiles %}    ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    <section class="s-pageheader s-pageheader--home">
+
+        <header class="header">
+            <div class="header__content row">
+
+                <div class="header__logo">
+                    <a class="logo" href="/">
+                        <img src="{% static 'images/logo.png' %}" alt="Homepage">
+                    </a>
+                </div> <!-- end header__logo -->
+
+                <ul class="header__social">
+                    <li>
+                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    </li>
+                </ul> <!-- end header__social -->
+
+                <a class="header__search-trigger" href="#0"></a>
+
+                <div class="header__search">
+
+                    <form role="search" method="get" class="header__search-form" action="#">
+                        <label>
+                            <span class="hide-content">Искать:</span>
+                            <input type="search" class="search-field" placeholder="Введите слова для поиска" value="" name="s" title="Искать:" autocomplete="off">
+                        </label>
+                        <input type="submit" class="search-submit" value="Search">
+                    </form>
+
+                    <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
+
+                </div>  <!-- end header__search -->
+
+
+                <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+
+                <nav class="header__nav-wrap">
+
+                    <h2 class="header__nav-heading h6">Site Navigation</h2>
+
+                    <ul class="header__nav">
+                        <li class="current"><a href="/" title="">Главная</a></li>
+                        <li><a href="/places" title="">Места</a></li>
+                        <li class="has-children">
+                            <a href="#0" title="">Категории</a>
+                            <ul class="sub-menu">
+                            <li><a href="places">Парки отдыха</a></li>
+                            <li><a href="places.html">Кафе</a></li>
+                            <li><a href="places.html">Аквапарки</a></li>
+                            <li><a href="places.html">Спортивный отдых</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about.html" title="">О сервисе</a></li>
+                        <li><a href="contact.html" title="">Контакты</a></li>
+                    </ul> <!-- end header__nav -->
+
+                    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+                </nav> <!-- end header__nav-wrap -->
+
+            </div> <!-- header-content -->
+        </header> <!-- header -->
+
+
+        <div class="pageheader-content row">
+            <div class="col-full">
+
+                <div class="featured">
+
+                    <div class="featured__column featured__column--big">
+                        <div class="entry" style="background-image:url({% static 'images/featured-guitarman.jpg' %});">
+
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="#0">Перейти к сервису</a></span>
+
+                                <h1><a href="#0" title="">Лучшие места для семейного отдыха на TimeForFamily</a></h1>
+
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+                    </div> <!-- end featured__big -->
+
+                    <div class="featured__column featured__column--small">
+
+                        <div class="entry" style="background-image:url('images/thumbs/featured/featured-watch.jpg');">
+
+                            <div class="entry__content">
+                                <span class="entry__category"><a href="#0">Преимущества</a></span>
+
+                                <h1><a href="#0" title="">TimeForFamily предлагает: </a></h1>
+
+                                <div class="entry__info">
+                                    <a href="#0" class="entry__profile-pic">
+                                        <img class="avatar" src="images/avatars/user-03.jpg" alt="">
+                                    </a>
+
+                                    <ul>
+                                        <li>Подбор мест для семейного отдыха</li>
+                                        <li>Лучшие места от Google</li>
+                                        <li>Машинное обучение для оценивания мест на основе отзывов посетителей</li>
+                                    </ul>
+                                </div>
+                            </div> <!-- end entry__content -->
+
+                        </div> <!-- end entry -->
+
+
+                    </div> <!-- end featured__small -->
+                </div> <!-- end featured -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end pageheader-content row -->
+
+    </section> <!-- end s-pageheader -->
+
+
+    <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+
+        <div class="row bottom tags-wrap">
+            <div class="col-full tags">
+                <h3>Теги</h3>
+
+                <div class="tagcloud">
+                    <a href="#0">Отдых</a>
+                    <a href="#0">Семья</a>
+                    <a href="#0">Выходные</a>
+                    <a href="#0">Парки</a>
+                    <a href="#0">Зоопарки</a>
+                    <a href="#0">Аквапарки</a>
+                    <a href="#0">Кино</a>
+                </div> <!-- end tagcloud -->
+            </div> <!-- end tags -->
+        </div> <!-- end tags-wrap -->
+
+    </section> <!-- end s-extra -->
+
+
+    <!-- s-footer
+    ================================================== -->
+    <footer class="s-footer">
+
+        <div class="s-footer__main">
+            <div class="row">
+
+                <div class="col-two md-four mob-full s-footer__sitelinks">
+
+                    <h4>Cсылки</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/">Контакты</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__sitelinks -->
+
+                <div class="col-two md-four mob-full s-footer__social">
+
+                    <h4>Соц. сети</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="@arsik07">Telegram</a></li>
+                        <li><a href="https://instagram.com/official_romantsov">Instagram</a></li>
+                        <li><a href="https://www.vk.com/a.romantsov1">VK</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social -->
+
+                <div class="col-five md-full end s-footer__subscribe">
+
+                    <h4>Новости:</h4>
+
+
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true">
+
+                            <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
+
+                            <input type="submit" name="subscribe" value="Отправить">
+
+                            <label for="mc-email" class="subscribe-message"></label>
+
+                        </form>
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div>
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="col-full">
+                    <div class="s-footer__copyright">
+                        <span>© Copyright - в основе лежит полностью переписанный шаблон Philosophy (2018)</span>
+                        <span>Арсений Романцов, для конкурса школы "Летово" <a href="https://colorlib.com/">февраль 2018</a></span>
+                    </div>
+
+                    <div class="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer --
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

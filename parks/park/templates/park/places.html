@@ -1,0 +1,313 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Парки Казани</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- {% load staticfiles %}    ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    <section class="s-pageheader">
+
+        <header class="header">
+            <div class="header__content row">
+
+                <div class="header__logo">
+                    <a class="logo" href="/">
+                        <img src="{% static 'images/logo.png' %}" alt="Homepage">
+                    </a>
+                </div> <!-- end header__logo -->
+
+                <ul class="header__social">
+                    <li>
+                        <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    </li>
+                </ul> <!-- end header__social -->
+
+                <a class="header__search-trigger" href="#0"></a>
+
+                <div class="header__search">
+
+                    <form role="search" method="get" class="header__search-form" action="#">
+                        <label>
+                            <span class="hide-content">Искать:</span>
+                            <input type="search" class="search-field" placeholder="Введите слова для поиска" value="" name="s" title="Искать:" autocomplete="off">
+                        </label>
+                        <input type="submit" class="search-submit" value="Search">
+                    </form>
+
+                    <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
+
+                </div>  <!-- end header__search -->
+
+
+                <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+
+                <nav class="header__nav-wrap">
+
+                    <h2 class="header__nav-heading h6">Site Navigation</h2>
+
+                    <ul class="header__nav">
+                        <li><a href="/" title="">Главная</a></li>
+                        <li class="current"><a href="/places" title="">Места</a></li>
+                        <li class="has-children">
+                            <a href="#0" title="">Категории</a>
+                            <ul class="sub-menu">
+                            <li><a href="places">Парки отдыха</a></li>
+                            <li><a href="places.html">Кафе</a></li>
+                            <li><a href="places.html">Аквапарки</a></li>
+                            <li><a href="places.html">Спортивный отдых</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="about.html" title="">О сервисе</a></li>
+                        <li><a href="contact.html" title="">Контакты</a></li>
+                    </ul> <!-- end header__nav -->
+
+                    <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
+
+                </nav> <!-- end header__nav-wrap -->
+
+            </div> <!-- header-content -->
+        </header> <!-- header -->
+    </section> <!-- end s-pageheader -->
+
+
+    <!-- s-content
+    ================================================== -->
+    <section class="s-content">
+
+        <div class="row masonry-wrap">
+            <div class="masonry">
+
+                <div class="grid-sizer"></div>
+
+                {% for park in all_parks %}
+
+                    <article class="masonry__brick entry format-standard" data-aos="fade-up">
+
+                        <div class="entry__thumb">
+
+                            <a href="{{park.id}}" class="entry__thumb-link">
+                                {% if park.photos.all.0 %}
+                                     <img src="{{ park.photos.all.0 }}" style="width:320px;height:210px;" alt="No Photo">
+                                {% else %}
+                                     <img src="{% static 'images/no_photo.png' %}" style="width:320px;height:210px;" alt="No Photo">
+                                {% endif %}
+                            </a>
+                        </div>
+
+                        <div class="entry__text">
+                            <div class="entry__header">
+
+                                <div class="entry__date">
+                                    <a href="single-standard.html">{{ park.created_date }}</a>
+                                </div>
+                                <h1 class="entry__title"><a href="single-standard.html">{{park.title|slice:":24"}}</a></h1>
+                                {% if park.website != None %}
+                                    <a href="{{park.website}}"> {{park.website}} </a>
+                                {% else %}
+                                    <a href="/">Сайт не указан</a>
+                                {% endif %}
+<!--
+                            </div>
+                            {% for rev in park.reviews.all %}
+                            <div class="entry__excerpt">
+                                <p>
+                                    {{ rev.review_text }}
+                                </p>
+                            </div>
+                            {% endfor %}
+                            <div class="entry__meta">
+                                <span class="entry__meta-links">
+                                    <a href="category.html">Design</a>
+                                    <a href="category.html">Photography</a>
+                                </span>
+                            </div>
+-->
+                        </div>
+
+                    </article> <!-- end article -->
+
+                {% endfor %}
+
+
+
+            </div> <!-- end masonry -->
+        </div> <!-- end masonry-wrap -->
+
+        <div class="row">
+            <div class="col-full">
+                <nav class="pgn">
+                    <ul>
+                        <li><a class="pgn__prev" href="#0">Prev</a></li>
+                        <li><a class="pgn__num" href="#0">1</a></li>
+                        <li><span class="pgn__num current">2</span></li>
+                        <li><a class="pgn__num" href="#0">3</a></li>
+                        <li><a class="pgn__num" href="#0">4</a></li>
+                        <li><a class="pgn__num" href="#0">5</a></li>
+                        <li><span class="pgn__num dots">…</span></li>
+                        <li><a class="pgn__num" href="#0">8</a></li>
+                        <li><a class="pgn__next" href="#0">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </section> <!-- s-content -->
+
+
+     <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
+
+        <div class="row bottom tags-wrap">
+            <div class="col-full tags">
+                <h3>Теги</h3>
+
+                <div class="tagcloud">
+                    <a href="#0">Отдых</a>
+                    <a href="#0">Семья</a>
+                    <a href="#0">Выходные</a>
+                    <a href="#0">Парки</a>
+                    <a href="#0">Зоопарки</a>
+                    <a href="#0">Аквапарки</a>
+                    <a href="#0">Кино</a>
+                </div> <!-- end tagcloud -->
+            </div> <!-- end tags -->
+        </div> <!-- end tags-wrap -->
+
+    </section> <!-- end s-extra -->
+
+
+
+    <!-- s-footer
+    ================================================== -->
+    <footer class="s-footer">
+
+        <div class="s-footer__main">
+            <div class="row">
+
+                <div class="col-two md-four mob-full s-footer__sitelinks">
+
+                    <h4>Cсылки</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/">Контакты</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__sitelinks -->
+
+                <div class="col-two md-four mob-full s-footer__social">
+
+                    <h4>Соц. сети</h4>
+
+                    <ul class="s-footer__linklist">
+                        <li><a href="@arsik07">Telegram</a></li>
+                        <li><a href="https://instagram.com/official_romantsov">Instagram</a></li>
+                        <li><a href="https://www.vk.com/a.romantsov1">VK</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social -->
+
+                <div class="col-five md-full end s-footer__subscribe">
+
+                    <h4>Новости:</h4>
+
+
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true">
+
+                            <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
+
+                            <input type="submit" name="subscribe" value="Отправить">
+
+                            <label for="mc-email" class="subscribe-message"></label>
+
+                        </form>
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div>
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="col-full">
+                    <div class="s-footer__copyright">
+                        <span>© Copyright - в основе лежит полностью переписанный шаблон Philosophy (2018)</span>
+                        <span>Арсений Романцов, для конкурса школы "Летово" <a href="https://colorlib.com/">февраль 2018</a></span>
+                    </div>
+
+                    <div class="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer -->
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
