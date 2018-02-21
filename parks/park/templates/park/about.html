@@ -4,14 +4,6 @@
 <html class="no-js" lang="en">
 <head>
 
-    <style>
-      #map {
-        height: 300px;
-        width: 80%;
-       }
-    </style>
-
-
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
@@ -41,6 +33,7 @@
 </head>
 
 <body id="top">
+
     <!-- pageheader
     ================================================== -->
     <section class="s-pageheader">
@@ -93,18 +86,19 @@
                     <h2 class="header__nav-heading h6">Site Navigation</h2>
 
                     <ul class="header__nav">
-                        <li class="current"><a href="/" title="">Главная</a></li>
+                        <li><a href="/" title="">Главная</a></li>
                         <li><a href="/places" title="">Места</a></li>
                         <li class="has-children">
                             <a href="#0" title="">Категории</a>
                             <ul class="sub-menu">
-                            <li><a href="/get_parks">Парки отдыха</a></li>
-                            <li><a href="places.html">Кафе</a></li>
-                            <li><a href="places.html">Аквапарки</a></li>
-                            <li><a href="places.html">Спортивный отдых</a></li>
+                            <li><a href="get_parks/">Парки отдыха</a></li>
+                            <li><a href="get_cafes/">Кафе</a></li>
+                            <li><a href="get_aquas/">Аквапарки</a></li>
+                            <li><a href="get_active/">Спортивный отдых</a></li>
+                            <li><a href="get_cinemas/">Кинотеатры</a></li>
                             </ul>
                         </li>
-                        <li><a href="http://arsik07.pythonanywhere.com/about/" title="">О сервисе</a></li>
+                        <li class="current"><a href="/about" title="">О сервисе</a></li>
                     </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
@@ -114,95 +108,45 @@
             </div> <!-- header-content -->
         </header> <!-- header -->
     </section> <!-- end s-pageheader -->
+        <center>
+        <div style="width:80%;font-size:20px;padding-top:10px;">
+            <p>
+                Добрый день! Мой веб-сервис «Time For Family», который я разработал в рамках конкурса проектных работ для школы «Летово».
+                Данный сервис поддерживает современную мобильную версию для любых портативных устройств.
+            </p>
+            <p>
+                Приходилось ли Вам сталкиваться с ситуацией, когда Вы не знаете, как провести выходной с семьей? Нет ничего проще! "Time For Family" поможет Вам решить эту проблему! С помощью языка Python 3 и веб-фреймворка Django мной был разработан веб-сервис для поиска наиболее удачных парков, аквапарков, кинотеатров, торговых центров и других мест, где можно увлекательно провести время!
+            </p>
+            <p>
+                SQLite база данных данного сервиса была сформирована с использованием Google Places API. Отправляя запросы с нужной тематикой и разбирая JSON-ответы от данного сервиса, мне удалось сформировать базу мест для заданной целевой аудитории - семейный отдых и отдых с детьми. Были собраны все данные о местах - названия, адрес, веб-сайт, рейтинг и даже отзывы! С помощью технологий HTML/CSS/JavaScript был сформирован дружелюбный для пользователя интерфейс, отображающий все эти данные для любых устройств. Следующей задачей стало использование машинного обучения и семантических библиотек для определения положительных и отрицательных отзывов, которые я получил от Google. Были использованы библиотеки TextBlob и Scikit-Learn. Далее, с помощью метода голосования, сервис может легко определить, каких отзывов больше - хороших или плохих. Эта возможность становится надежным помощником посетителя сайта при выборе места и становится основой для сервиса рекомендаций.
+            </p>
+        </div>
+        </center>
 
-    <section class="s-content">
-         <div class="row masonry-wrap">
-            <center>
-               <div class="w3-content w3-display-container" style="padding-top:15px;">
-                    {% for p in park.photos.all %}
-                        <img class="mySlides" src="{{ p }}">
-                    {% endfor %}
-                    <div style="padding-top:15px;">
-                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-                    </div>
-                </div>
+    <!-- s-extra
+    ================================================== -->
+    <section class="s-extra">
 
-                <script>
-                var slideIndex = 1;
-                showDivs(slideIndex);
+        <div class="row bottom tags-wrap">
+            <div class="col-full tags">
+                <h3>Теги</h3>
 
-                function plusDivs(n) {
-                  showDivs(slideIndex += n);
-                }
+                <div class="tagcloud">
+                    <a href="#0">Отдых</a>
+                    <a href="#0">Семья</a>
+                    <a href="#0">Выходные</a>
+                    <a href="#0">Парки</a>
+                    <a href="#0">Зоопарки</a>
+                    <a href="#0">Аквапарки</a>
+                    <a href="#0">Кино</a>
+                </div> <!-- end tagcloud -->
+            </div> <!-- end tags -->
+        </div> <!-- end tags-wrap -->
 
-                function showDivs(n) {
-                  var i;
-                  var x = document.getElementsByClassName("mySlides");
-                  if (n > x.length) {slideIndex = 1}
-                  if (n < 1) {slideIndex = x.length}
-                  for (i = 0; i < x.length; i++) {
-                     x[i].style.display = "none";
-                  }
-                  x[slideIndex-1].style.display = "block";
-                }
-                </script>
-                <h1>{{ park.title }}</h1>
-                {% if park.rating > 3.7 %}
-                     <h1 style="color:green;">{{ park.rating }}</h1>
-                {% else %}
-                     <h1 style="color:red;">{{ park.rating }}</h1>
-                {% endif %}
-                <h4>{{ park.formatted_address }}</h4>
-                {% if park.website %}
-                     <h3><a href="{{ park.website }}">{{park.website}}</a></h3>
-                {% else %}
-                    <h3> Веб-сайт отсутствует</h3>
-                {% endif %}
-                {% for rev in park.reviews.all %}
-                    <div class="entry__excerpt">
-                        {% if rev.mark == True %}
-                            <p style="border:2px; border-style: solid; border-color:#000000; padding: 1em;">
-                                <i>Отзыв, скорее, положительный: </i></br>
-                                {{ rev.review_text }}
-                            </p>
-                        {% else %}
-                            <p style="border:3px; border-style: solid; border-color:#000000; padding: 1em;">
-                                <i>Отзыв, скорее, негативный: </i></br>
-                                {{ rev.review_text }}
-                            </p>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-
-                <center>
-                    <div style="margin-bottom:7px;" id="map"></div>
-                </center>
-
-                <script>
-                        function initMap() {
-                            var uluru = {lat: {{lat}}, lng: {{lan}} };
-                            var map = new google.maps.Map(document.getElementById('map'), {
-                                    zoom: 18,
-                                    center: uluru
-                            });
-                            var marker = new google.maps.Marker({
-                                    position: uluru,
-                                    map: map
-                            });
-                        }
-                </script>
-                <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhDhyD_bQ9qSJDRuKocSGIKNlH_3UYlwo&callback=initMap">
-                </script>
-
-            </center>
-         </div>
-    </section>
+    </section> <!-- end s-extra -->
 
 
-
-   <!-- s-footer
+    <!-- s-footer
     ================================================== -->
     <footer class="s-footer">
 
@@ -270,7 +214,6 @@
         </div> <!-- end s-footer__bottom -->
 
     </footer> <!-- end s-footer --
-
 
     <!-- preloader
     ================================================== -->

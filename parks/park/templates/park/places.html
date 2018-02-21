@@ -83,7 +83,7 @@
 
                 <nav class="header__nav-wrap">
 
-                    <h2 class="header__nav-heading h6">Site Navigation</h2>
+                    <h2 class="header__nav-heading h6">Меню сайта</h2>
 
                     <ul class="header__nav">
                         <li><a href="/" title="">Главная</a></li>
@@ -91,14 +91,13 @@
                         <li class="has-children">
                             <a href="#0" title="">Категории</a>
                             <ul class="sub-menu">
-                            <li><a href="places">Парки отдыха</a></li>
-                            <li><a href="places.html">Кафе</a></li>
-                            <li><a href="places.html">Аквапарки</a></li>
-                            <li><a href="places.html">Спортивный отдых</a></li>
+                            <li><a href="http://arsik07.pythonanywhere.com/get_parks">Парки отдыха</a></li>
+                            <li><a href="http://arsik07.pythonanywhere.com/get_cafes">Кафе</a></li>
+                            <li><a href="http://arsik07.pythonanywhere.com/get_aquas">Аквапарки</a></li>
+                            <li><a href="http://arsik07.pythonanywhere.com/get_active">Спортивный отдых</a></li>
                             </ul>
                         </li>
-                        <li><a href="about.html" title="">О сервисе</a></li>
-                        <li><a href="contact.html" title="">Контакты</a></li>
+                        <li><a href="http://arsik07.pythonanywhere.com/about/" title="">О сервисе</a></li>
                     </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
@@ -125,7 +124,7 @@
 
                         <div class="entry__thumb">
 
-                            <a href="{{park.id}}" class="entry__thumb-link">
+                            <a href="http://arsik07.pythonanywhere.com/places/{{park.id}}" class="entry__thumb-link">
                                 {% if park.photos.all.0 %}
                                      <img src="{{ park.photos.all.0 }}" style="width:320px;height:210px;" alt="No Photo">
                                 {% else %}
@@ -138,30 +137,15 @@
                             <div class="entry__header">
 
                                 <div class="entry__date">
-                                    <a href="single-standard.html">{{ park.created_date }}</a>
+                                    <a href="http://arsik07.pythonanywhere.com/places/{{park.id}}">{{ park.created_date }}</a>
                                 </div>
-                                <h1 class="entry__title"><a href="single-standard.html">{{park.title|slice:":24"}}</a></h1>
+                                <h1 class="entry__title"><a href="{{park.id}}">{{park.title|slice:":24"}}</a></h1>
                                 {% if park.website != None %}
                                     <a href="{{park.website}}"> {{park.website}} </a>
                                 {% else %}
                                     <a href="/">Сайт не указан</a>
                                 {% endif %}
-<!--
-                            </div>
-                            {% for rev in park.reviews.all %}
-                            <div class="entry__excerpt">
-                                <p>
-                                    {{ rev.review_text }}
-                                </p>
-                            </div>
-                            {% endfor %}
-                            <div class="entry__meta">
-                                <span class="entry__meta-links">
-                                    <a href="category.html">Design</a>
-                                    <a href="category.html">Photography</a>
-                                </span>
-                            </div>
--->
+
                         </div>
 
                     </article> <!-- end article -->
@@ -172,24 +156,6 @@
 
             </div> <!-- end masonry -->
         </div> <!-- end masonry-wrap -->
-
-        <div class="row">
-            <div class="col-full">
-                <nav class="pgn">
-                    <ul>
-                        <li><a class="pgn__prev" href="#0">Prev</a></li>
-                        <li><a class="pgn__num" href="#0">1</a></li>
-                        <li><span class="pgn__num current">2</span></li>
-                        <li><a class="pgn__num" href="#0">3</a></li>
-                        <li><a class="pgn__num" href="#0">4</a></li>
-                        <li><a class="pgn__num" href="#0">5</a></li>
-                        <li><span class="pgn__num dots">…</span></li>
-                        <li><a class="pgn__num" href="#0">8</a></li>
-                        <li><a class="pgn__next" href="#0">Next</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
 
     </section> <!-- s-content -->
 
@@ -210,6 +176,7 @@
                     <a href="#0">Зоопарки</a>
                     <a href="#0">Аквапарки</a>
                     <a href="#0">Кино</a>
+                    <a href="#0">Еда</a>
                 </div> <!-- end tagcloud -->
             </div> <!-- end tags -->
         </div> <!-- end tags-wrap -->

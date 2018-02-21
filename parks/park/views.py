@@ -4,6 +4,8 @@ from googleplaces import GooglePlaces, types, lang
 from .models import Photo, Park, Review
 from itertools import islice
 from django.http import JsonResponse
+from textblob import TextBlob
+import requests
 import time
 
 google_api_key = 'AIzaSyCxXyUAfR3gpbBowNNUlBb0CCaxqz5aU2c'
@@ -71,26 +73,59 @@ def places(request):
 
 def place_details(request, park_id):
     park = Park.objects.get(id=park_id)
-    return render(request, 'park/place_details.html', {'park': park})
+    try:
+        response = requests.get("https://geocode-maps.yandex.ru/1.x/?geocode=" + park.formatted_address + u'&format=json')
+        data = response.json()
+        geolocation = data['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['Point']['pos']
+        geolocation = geolocation.split()
+        first_coord = float(geolocation[1])
+        second_coord = float(geolocation[0])
+    except:
+        first_coord = 55.78874
+        second_coord = 49.12214
+    return render(request, 'park/place_details.html', {'park': park, 'lat': str(first_coord).replace(',', '.'), 'lan': str(second_coord).replace(',', '.')})
 
 def get_review_marks(request):
     reviews = Review.objects.all()
     for rev in reviews:
-        print(rev.review_text)
         try:
-            blob = TextBlob(rev.review_text)
+            blob = TextBlob(rev.review_text.lower())
             blob = blob.translate(to='en')
-            if blob.sentiment.polarity > 0:
+            m = blob.sentiment.polarity
+            if '👎' in rev.review_text:
+                m -= 0.5
+            if ')' in rev.review_text:
+                m += 0.1
+            if 'супер' in rev.review_text or 'красив' in rev.review_text or 'здоров' in rev.review_text:
+                m += 0.2
+            if m > 0.2:
                 rev.mark = True
-                print(blob.sentiment.polarity)
-                print('yes')
+                rev.save()
             else:
                 rev.mark = False
-                print(blob.sentiment.polarity)
-                print('no')
-            rev.save()
+                rev.save()
+
         except:
             continue
-    return JsonResponse({})
+    return JsonResponse({'done':'ok'})
+
+def get_parks(request):
+    request_parks = Park.objects.filter(place_type='Pa')
+    return render(request, 'park/places.html', {'all_parks':request_parks})
+
+def get_cafes(request):
+    request_cafes = Park.objects.filter(place_type='Ca')
+    return render(request, 'park/places.html', {'all_parks':request_cafes})
+
+def get_aquas(request):
+    request_aquas = Park.objects.filter(place_type='Aq')
+    return render(request, 'park/places.html', {'all_parks':request_aquas})
+
+def get_cinemas(request):
+    request_cinemas = Park.objects.fitler(place_type='Ci')
+    return render(request, 'park/places.html', {'all_parks':request_cinemas})
+
+def about(request):
+    return render(request, 'park/about.html', {})
 
 
