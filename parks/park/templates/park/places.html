@@ -92,9 +92,9 @@
                             <a href="#0" title="">Категории</a>
                             <ul class="sub-menu">
                             <li><a href="http://arsik07.pythonanywhere.com/get_parks">Парки отдыха</a></li>
-                            <li><a href="http://arsik07.pythonanywhere.com/get_cafes">Кафе</a></li>
+                            <li><a href="http://arsik07.pythonanywhere.com/get_cinemas">Кинотеатры</a></li>
                             <li><a href="http://arsik07.pythonanywhere.com/get_aquas">Аквапарки</a></li>
-                            <li><a href="http://arsik07.pythonanywhere.com/get_active">Спортивный отдых</a></li>
+                            <li><a href="http://arsik07.pythonanywhere.com/get_active">Активный отдых</a></li>
                             </ul>
                         </li>
                         <li><a href="http://arsik07.pythonanywhere.com/about/" title="">О сервисе</a></li>
@@ -139,7 +139,7 @@
                                 <div class="entry__date">
                                     <a href="http://arsik07.pythonanywhere.com/places/{{park.id}}">{{ park.created_date }}</a>
                                 </div>
-                                <h1 class="entry__title"><a href="{{park.id}}">{{park.title|slice:":24"}}</a></h1>
+                                <h1 class="entry__title"><a href="http://arsik07.pythonanywhere.com/places/{{park.id}}">{{park.title|slice:":24"}}</a></h1>
                                 {% if park.website != None %}
                                     <a href="{{park.website}}"> {{park.website}} </a>
                                 {% else %}

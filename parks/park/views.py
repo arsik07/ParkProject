@@ -15,8 +15,10 @@ number_of_photos=7
 number_of_reviews=100
 
 def start_page(request):
+    #список запросов для поиска
     queries = ['парк развлечений казань', 'кинотеатр казань', 'парк казань', 'аттракционы казань', 'аквапарк казань']
     google_places = GooglePlaces(google_api_key)
+    #раскомментировать для перезаполнения базы данных
     '''Park.objects.all().delete()
     Photo.objects.all().delete()
     Review.objects.all().delete()
@@ -87,25 +89,51 @@ def place_details(request, park_id):
 
 def get_review_marks(request):
     reviews = Review.objects.all()
+
+    data_good = pd.read_csv('good_tweets.csv', sep=';', error_bad_lines=False)
+    data_bad = pd.read_csv('bad_tweets.csv', sep=';', error_bad_lines=False)
+    good = data_good.iloc[:, 3].head(2000)
+    bad = data_bad.iloc[:, 3].head(2000)
+
+    data = []
+    data_labels = [] #['neg', 'pos', 'neg', 'neg']
+
+    for index, row in good.iteritems():
+        data.append(str(row))
+        data_labels.append('pos')
+    for index, row in bad.iteritems():
+        data.append(str(row))
+        data_labels.append('neg')
+    vectorizer = CountVectorizer(
+        analyzer = 'word',
+        lowercase = False,
+    )
+    features = vectorizer.fit_transform(data)
+    mod = pickle.load(open('final_model.sav', 'rb')) #модель логистической регрессии final_model.sav была создана ранее с библиотекой SciKit-Learn
+    k = []
     for rev in reviews:
         try:
-            blob = TextBlob(rev.review_text.lower())
-            blob = blob.translate(to='en')
-            m = blob.sentiment.polarity
-            if '👎' in rev.review_text:
-                m -= 0.5
-            if ')' in rev.review_text:
-                m += 0.1
-            if 'супер' in rev.review_text or 'красив' in rev.review_text or 'здоров' in rev.review_text:
-                m += 0.2
-            if m > 0.2:
-                rev.mark = True
-                rev.save()
-            else:
+            f = vectorizer.transform([rev.review_text])
+            mark = mod.predict(f)[0]
+            if mark == 'neg':
                 rev.mark = False
-                rev.save()
+            else:
+                rev.mark = True
+            rev.save()
 
-        except:
+            #blob = TextBlob(rev.review_text.lower()) #алгоритм с использованием лингвистической библиотеки TextBlob для семантического анализа, она используется на сервере из-за ограничений диска
+            #blob = blob.translate(to='en')
+            #m = blob.sentiment.polarity
+            #if '👎' in rev.review_text:
+            #    m -= 0.5
+            #if m > 0.15:
+            #    rev.mark = True
+            #    rev.save()
+            #else:
+            #    rev.mark = False
+            #    rev.save()
+        except Exception as e:
+            print(e)
             continue
     return JsonResponse({'done':'ok'})
 
